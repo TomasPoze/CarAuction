@@ -1,0 +1,12 @@
+{
+    "common":{
+        "title":"Car-Auction",
+        "home": "Home",
+        "auctions": "Auctions",
+        "about": "About",
+        "language": "Language",
+        "register": "Register",
+        "signin": "Sign In",
+        "search":"Search"
+    }
+}

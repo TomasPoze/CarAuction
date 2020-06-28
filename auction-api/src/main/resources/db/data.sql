@@ -1,0 +1,1 @@
+INSERT INTO Posts(title, starting_price) VALUES('Bmw E46', 200);

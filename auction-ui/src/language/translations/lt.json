@@ -1,0 +1,12 @@
+{
+    "common": {
+        "title":"Masinu-Aukcionas",
+        "home": "Pagrindinis",
+        "auctions": "Aukcionai",
+        "about": "Apie",
+        "language": "Kalba",
+        "register": "Registracija",
+        "signin": "Prisijungimas",
+        "search":"Ieskoti"
+    }
+}

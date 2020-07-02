@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+
 
 export default () => {
 
@@ -26,7 +26,7 @@ export default () => {
                     <Nav.Link href="#About">{t("about")}</Nav.Link>
                     <Nav.Link href="#Register">{t("register")}</Nav.Link>
                     <Nav.Link href="#SignIn">{t("signin")}</Nav.Link>
-                    <NavDropdown id="basic-nav-dropdown">
+                    <NavDropdown title="" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#EN" onClick={changeLanguage('en')}>EN</NavDropdown.Item>
                         <NavDropdown.Item href="#LT" onClick={changeLanguage('lt')}>LT</NavDropdown.Item>
                     </NavDropdown>

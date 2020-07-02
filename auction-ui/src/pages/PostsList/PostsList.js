@@ -26,7 +26,7 @@ export default () => {
                     <tr key={post.id}>
                         <td>{post.title}</td>
                         <td>{post.price}</td>
-                        <td><NavLink to={`/post/${post.id}`}>More</NavLink></td>
+                        <td><NavLink to={`/posts/${post.id}`}>More</NavLink></td>
                     </tr>
                 ))}
             </tbody>

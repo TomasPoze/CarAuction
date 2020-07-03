@@ -7,6 +7,7 @@
         "language": "Kalba",
         "register": "Registracija",
         "signin": "Prisijungimas",
-        "search":"Ieskoti"
+        "search":"Ieskoti",
+        "login":"Prisijungti"
     }
 }

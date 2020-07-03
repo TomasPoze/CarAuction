@@ -7,6 +7,7 @@
         "language": "Language",
         "register": "Register",
         "signin": "Sign In",
-        "search":"Search"
+        "search":"Search",
+        "login":"Sign In"
     }
 }

@@ -1,6 +1,9 @@
 package lt.codeacademy.Car.auction.entities;
 
+import io.swagger.annotations.ApiModel;
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,8 +14,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
+@Builder
 @Entity
 @Table(name = "Users")
+@ApiModel(value = "User", description = "User")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,4 +77,7 @@ public class User implements UserDetails {
     public String getFullName() {
         return name + " " + lastName;
     }
+
+    @Tolerate
+    public User(){}
 }

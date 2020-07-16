@@ -9,5 +9,10 @@
         "signin": "Prisijungimas",
         "search":"Ieskoti",
         "login":"Prisijungti"
+    },
+    "validations": {
+        "required": "Laukas \"$t({{label}})\" yra privalomas",
+        "typeError": "Blogas reiksmes tipas",
+        "min": "Lauko \"$t({{label}})\" reiksme privalo buti didesne nei {{min}}"
     }
 }

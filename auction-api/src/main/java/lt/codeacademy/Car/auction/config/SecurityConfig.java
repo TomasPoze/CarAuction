@@ -21,8 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     private final OrRequestMatcher PRIVATE_ROUTES = new OrRequestMatcher(
-            new AntPathRequestMatcher("/**")
-            );
+            new AntPathRequestMatcher("/private/**")
+    );
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

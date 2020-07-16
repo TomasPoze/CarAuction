@@ -3,6 +3,9 @@ package lt.codeacademy.Car.auction.services;
 import lt.codeacademy.Car.auction.entities.Post;
 import lt.codeacademy.Car.auction.repositories.PostRepository;
 import lt.codeacademy.Car.auction.services.exceptions.PostNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,5 +36,10 @@ public class PostsService {
     public Post getPostById(Long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException("Post with id: " + id + " was not found"));
+    }
+
+    public Page<Post> getPostsPaginated(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return postRepository.findAll(pageable);
     }
 }

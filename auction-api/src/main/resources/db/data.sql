@@ -1,7 +1,12 @@
-INSERT INTO Posts(title, price) VALUES('Bmw E46', 2000);
-INSERT INTO Posts(title, price) VALUES('Bmw E91', 6000);
-INSERT INTO Posts(title, price) VALUES('Bmw E65', 5600);
+INSERT INTO Posts(make, model, year, km, gearbox, fuel, city, price) VALUES('Bmw', '320', 2003, 298000, 'Mechanine', 'Benzinas', 'Vilnius', 1400);
+INSERT INTO Posts(make, model, year, km, gearbox, fuel, city, price) VALUES('Bmw', '730', 2006, 268000, 'Automatine', 'Dyzelinas', 'Kaunas', 4400);
+INSERT INTO Posts(make, model, year, km, gearbox, fuel, city, price) VALUES('Bmw', '330', 2008, 262326, 'Automatine', 'Benzinas', 'Klaipeda', 5210);
 
+INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Klaipeda',CURRENT_TIMESTAMP(0),2000,'Jonas323',1);
+INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Vilnius',CURRENT_TIMESTAMP(0),2200,'Vairuotojas',1);
+INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Vilnius',CURRENT_TIMESTAMP(0),2300,'Salemis',1);
+INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Kaunas',CURRENT_TIMESTAMP(0),2400,'Nysktukas',1);
+INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Vilnius',CURRENT_TIMESTAMP(0),2400,'Saliarska',2);
 
 INSERT INTO Users(user_id, username, password, name, last_name,city)
     VALUES(1, 'user', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'John', 'Doe','Vilnius');

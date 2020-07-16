@@ -18,7 +18,7 @@ function App() {
   return (
     <UserContext.Provider value={UserContextState}>
       <Router>
-        <Header />
+        <Header/>
         <Content />
       </Router>
     </UserContext.Provider>

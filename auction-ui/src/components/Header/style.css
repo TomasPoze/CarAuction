@@ -1,0 +1,8 @@
+.reg{
+    text-align: right;
+}
+
+.MuiAppBar-colorPrimary {
+    color: #fff;
+    background-color: #2b2b2b !important; 
+  }

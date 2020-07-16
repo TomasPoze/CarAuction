@@ -1,13 +1,19 @@
 {
-    "common":{
-        "title":"Car-Auction",
+    "common": {
+        "title": "Car-Auction",
         "home": "Home",
         "auctions": "Auctions",
         "about": "About",
         "language": "Language",
         "register": "Register",
         "signin": "Sign In",
-        "search":"Search",
-        "login":"Sign In"
+        "search": "Search",
+        "login": "Sign In",
+        "sum": "Sum"
+    },
+    "validations": {
+        "required": "Field \"$t({{label}})\" is required",
+        "typeError": "Bad value type",
+        "min": "Value of \"$t({{label}})\" must be bigger than {{min}}"
     }
 }

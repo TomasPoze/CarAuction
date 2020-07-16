@@ -26,9 +26,32 @@ public class Post {
     @ApiModelProperty(hidden = true)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "make")
     @NotEmpty
-    private String title;
+    private String make;
+
+    @Column(name = "model")
+    @NotEmpty
+    private String model;
+
+    @Column(name = "year")
+    @NotEmpty
+    private Integer year;
+
+    @Column(name = "km")
+    private Long km;
+
+    @Column(name = "gearbox")
+    @NotEmpty
+    private String gearbox;
+
+    @Column(name = "fuel")
+    @NotEmpty
+    private String fuel;
+
+    @Column(name = "city")
+    @NotEmpty
+    private String city;
 
     @Column(name = "price")
     @DecimalMin("1")

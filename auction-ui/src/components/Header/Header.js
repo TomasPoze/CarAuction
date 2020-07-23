@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useTranslation } from "react-i18next";
@@ -30,14 +30,16 @@ export default () => {
 
     const loggedInBlock = loggedIn() ?
         (<>
-            <Nav.Link >{user.name} {user.city} {user.lastName}</Nav.Link>
+            <LinkContainer to="/user/info">
+                <Nav.Link>{user.name} {user.lastName}</Nav.Link>
+            </LinkContainer>
             <Nav.Link href="#" onClick={logoutClick}>Atsijungti</Nav.Link>
         </>) :
         (<>
             <LinkContainer to="/register" className="reg">
-                <Nav.Link  className="reg">{t("register")}</Nav.Link>
+                <Nav.Link className="reg">{t("register")}</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/login"  className="reg">
+            <LinkContainer to="/login" className="reg">
                 <Nav.Link>{t("login")}</Nav.Link>
             </LinkContainer>
         </>)

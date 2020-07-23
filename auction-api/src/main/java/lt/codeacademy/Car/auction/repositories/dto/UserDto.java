@@ -13,6 +13,7 @@ public class UserDto {
     private String lastName;
     private String username;
     private Set<String> roles;
+    private String password;
     private String city;
 
     public UserDto(User user) {
@@ -20,6 +21,7 @@ public class UserDto {
         this.lastName = user.getLastName();
         this.username = user.getUsername();
         this.city = user.getCity();
+        this.password = user.getPassword();
         this.roles = user.getRoles().stream()
                 .map(Role::getRole)
                 .collect(Collectors.toSet());

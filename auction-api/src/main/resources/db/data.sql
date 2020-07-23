@@ -8,10 +8,10 @@ INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Vilnius',CURRENT_TIMEST
 INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Kaunas',CURRENT_TIMESTAMP(0),2400,'Nysktukas',1);
 INSERT INTO Bets(city,date,sum,username,post_id) VALUES('Vilnius',CURRENT_TIMESTAMP(0),2400,'Saliarska',2);
 
-INSERT INTO Users(user_id, username, password, name, last_name,city)
-    VALUES(1, 'user', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'John', 'Doe','Vilnius');
-INSERT INTO Users(user_id, username, password, name, last_name,city)
-    VALUES(2, 'admin', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'Jack', 'Sparrow','Kaunas');
+INSERT INTO Users( username, password, name, last_name,city)
+    VALUES( 'user', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'John', 'Doe','Vilnius');
+INSERT INTO Users( username, password, name, last_name,city)
+    VALUES('admin', '{bcrypt}$2y$12$A7x.2lPxE6YdV8ed6OYbDucRiod32wqMF9JNerE.wq4glQWaIjRnO', 'Jack', 'Sparrow','Kaunas');
 
 INSERT INTO Roles(role_id, role) VALUES(1, 'CUSTOMER');
 INSERT INTO Roles(role_id, role) VALUES(2, 'ADMIN');

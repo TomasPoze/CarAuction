@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import postsApi from '../../api/postsApi';
+import { useTranslation } from "react-i18next";
 import { NavLink, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -43,19 +44,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ComplexGrid() {
+    const { i18n } = useTranslation()
+    const { t } = useTranslation("car")
+
     const classes = useStyles();
 
+    const { id } = useParams({});
 
+    const [bet, setBet] = useState({ content: [], });
 
     const [posts, setPosts] = useState([]);
 
-
+    const sumInput = bet.content.length !== 0 ? (bet.content[bet.content.length - 1].sum) : 0
 
 
     useEffect(() => {
         postsApi.fetchPosts()
             .then(response => setPosts(response.data))
     }, [])
+
+    useEffect(() => {
+        postsApi.fetchBetById(id)
+            .then(resp => setBet(resp.data))
+    }, [id])
 
     // {posts.map(post => (
     //     <tr key={post.id}>
@@ -115,16 +126,11 @@ export default function ComplexGrid() {
                                         {post.city}
                                         </Typography>
                                     </Grid>
-                                    {/* <Grid item>
-                                <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                                Remove
-                                </Typography>
-                            </Grid> */}
                                 </Grid>
                                 <Grid item >
-                                    <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">Dabartinis statymas</Typography>
-                                    <Typography variant="h4" align="center" gutterBottom className="posfix">{post.price}€</Typography>
-                                    <Typography variant="inherit" align="center" className="border padt">Iki pabaigos: 12:23:11</Typography>
+                                <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">{t("bet")}</Typography>
+                                    <Typography variant="h4" align="center" gutterBottom className="posfix">{sumInput}€</Typography>
+                                    <Typography variant="inherit" align="center" className="border padt">{t("timer")}: 12:23:11</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>

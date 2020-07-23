@@ -1,3 +1,68 @@
 .pos{
     text-align: right;
 }
+
+.flex{
+    position: relative;;
+    top: 150px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: flex-end;
+	align-content: space-around;
+}
+
+.grid-container-home {
+    display: grid;
+    grid-template-columns: 1.4fr 0.3fr 1.4fr;
+    grid-template-rows: 0.9fr 1.2fr 0.9fr;
+    gap: 1px 1px;
+    grid-template-areas: ". . ." ". . ." ". . .";
+}
+
+.bg-img1{
+    background-image: url("https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100% ;
+}
+.bg-img2{
+    background-image: url("https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -240px;
+}
+
+.card {
+    height: 200px;
+    position: relative;
+    border: 3px solid green; 
+}
+
+.center{
+    width: 600px;
+    height: 500px;
+}
+
+.but-pos{
+    display: block;
+    text-align: center;
+    line-height: 500px;
+    color: rgb(0, 119, 255) ;
+    font-size: 30px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.but-pos2{
+    display: block;
+    text-align: center;
+    line-height: 500px;
+    color: rgb(0, 255, 136) ;
+    font-size: 30px;
+    font-weight: 800;
+    text-decoration: none;
+}
+ 

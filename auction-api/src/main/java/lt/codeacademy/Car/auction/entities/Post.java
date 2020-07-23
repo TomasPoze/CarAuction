@@ -61,6 +61,9 @@ public class Post {
     @Column(name = "file_name")
     private String fileName;
 
+    @Column(name = "bet_time")
+    private Integer betTime;
+
     @Tolerate
     public Post(){}
 }

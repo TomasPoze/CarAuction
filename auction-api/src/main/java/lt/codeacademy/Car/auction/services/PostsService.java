@@ -42,4 +42,8 @@ public class PostsService {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return postRepository.findAll(pageable);
     }
+
+    public void deletePost(Long id) {
+       postRepository.deleteById(id);
+    }
 }

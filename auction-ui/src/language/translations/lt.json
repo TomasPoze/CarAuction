@@ -1,14 +1,64 @@
 {
     "common": {
-        "title":"Masinu-Aukcionas",
+        "title": "Masinu-Aukcionas",
         "home": "Pagrindinis",
         "auctions": "Aukcionai",
         "about": "Apie",
         "language": "Kalba",
         "register": "Registracija",
         "signin": "Prisijungimas",
-        "search":"Ieskoti",
-        "login":"Prisijungti"
+        "search": "Ieskoti",
+        "login": "Prisijungti"
+    },
+    "home": {
+        "auctions": "Aukcionai",
+        "create": " Sukurti Aukciona"
+    },
+    "car": {
+        "carLoc":"Auto buvimo miestas",
+        "make":"Markė",
+        "model":"Modelis",
+        "year":"Metai",
+        "gearbox": "Pavarų dėžė",
+        "fuel": "Kuras",
+        "fuelType": "Kuro tipas",
+        "odometer":"Rida",
+        "price": "Pardavimo Kaina",
+        "file":"Nuotrauka",
+        "setTime":"Aukciono buvimo laikas",
+        "create":"Sukurti",
+        "city":"Miestas",
+        "gearbox1": "Mechaninė",
+        "gearbox2": "Automatinė",
+        "fuel1": "Benzinas",
+        "fuel2": "Dyzelis",
+        "fuel3": "Benzinas / dujos",
+        "fuel4": "Benzinas / elektra",
+        "fuel5": "Elektra",
+        "fuel6": "Dyzelinas / elektra",
+        "fuel7": "Bioetanolis",
+        "fuel8": "Kita",
+        "bet":"Dabartinis statymas",
+        "timer":"Iki pabaigos",
+        "betDate":"Statymo data",
+        "curBet":"Statymas",
+        "aucEnd":"Iki aukciono pabaigos",
+        "lastBet":"Paskutinis statymas",
+        "toBet":"NORĖDAMI STATYTI - PRISIJUNKITE",
+        "makeBet":"Daryti statymą"
+
+    },
+    "registration": {
+        "signUp": "Registracija",
+        "username": "Vartotojo vardas",
+        "name": "Vardas",
+        "lastName": "Pavardė",
+        "city": "Miestas",
+        "password": "Slaptažodis",
+        "acc": "Jau turite paskyrą? Prisijunkite",
+        "login":"Prisijungti",
+        "details":"Informacija apie vartotoją",
+        "update":"Atnaujinti"
     },
     "validations": {
         "required": "Laukas \"$t({{label}})\" yra privalomas",

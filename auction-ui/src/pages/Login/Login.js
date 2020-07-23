@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import userApi from '../../api/userApi';
 import { setCredentials } from '../../api';
 import { UserContext } from '../../App';
+import { useTranslation } from "react-i18next";
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -57,6 +58,8 @@ function Copyright() {
 
 export default () => {
     const classes = useStyles();
+    const { i18n } = useTranslation()
+    const { t } = useTranslation("registration")
 
     const { login } = useContext(UserContext);
     const history = useHistory();
@@ -66,7 +69,6 @@ export default () => {
 
     const onSubmit = values => {
         setCredentials(values)
-
         userApi.getUser()
             .then(({ data }) => {
                 login(data)
@@ -85,7 +87,7 @@ export default () => {
                         <Avatar className={classes.avatar}>
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            {t("login")}
                         </Typography>
                         <Form className={classes.form}>
                             <div>
@@ -97,7 +99,7 @@ export default () => {
                                     margin="normal"
                                     required
                                     fullWidth
-                                    label="Username"
+                                    label={t("username")}
                                     autoFocus
                                 />
                             </div>
@@ -109,7 +111,7 @@ export default () => {
                                     required
                                     fullWidth
                                     name="password"
-                                    label="Password"
+                                    label={t("password")}
                                     type="password"
                                     autoComplete="current-password"
                                 />
@@ -122,7 +124,7 @@ export default () => {
                                     color="primary"
                                     className={classes.submit}
                                     >
-                                    Sign In
+                                    {t("login")}
                                 </Button>
                             </div>
                             {/* <FormikState {...props} /> */}

@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiResponses;
 import lt.codeacademy.Car.auction.entities.Post;
 import lt.codeacademy.Car.auction.services.BetsService;
 import lt.codeacademy.Car.auction.services.PostsService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +46,15 @@ public class AuctionController {
         return postsService.getPostById(id);
     }
 
+    @GetMapping("/{id}/delete")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String deletePost(@PathVariable Long id, Model model){
+        postsService.deletePost(id);
+        List<Post> posts = postsService.getAllPosts();
+        model.addAttribute("posts",posts);
+        return "posts";
+    }
+
     @PostMapping("/post")
     public Post createPost(
             @RequestParam(name = "file", required = false) MultipartFile file,
@@ -54,7 +65,9 @@ public class AuctionController {
             @RequestParam(name = "gearbox") String gearbox,
             @RequestParam(name = "fuel") String fuel,
             @RequestParam(name = "city") String city,
-            @RequestParam(name = "price") Integer price) {
+            @RequestParam(name = "price") Integer price,
+            @RequestParam(name = "bet_time")Integer betTime)
+    {
 
         Post post = Post.builder()
                 .make(make)
@@ -65,6 +78,7 @@ public class AuctionController {
                 .fuel(fuel)
                 .city(city)
                 .price(price)
+                .betTime(betTime)
                 .build();
 
         return postsService.createPost(post,file);

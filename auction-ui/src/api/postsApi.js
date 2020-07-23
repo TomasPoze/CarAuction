@@ -13,6 +13,9 @@ export default {
     fetchBets(postId){
         return HTTP.get(`/bets?postId=${postId}`)
     },
+    deletePostById(id){
+        return HTTP.get(`/posts/${id}/delete`)
+    },
     createPost(post, file) {
         let data = new FormData();
         data.append("file", file);
@@ -24,6 +27,7 @@ export default {
         data.append("fuel", post.fuel);
         data.append("city", post.city);
         data.append("price", post.price);
+        data.append("bet_time",post.betTime);
         return HTTP.post('/posts/post', data);
     },
     createBet(bet){

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -46,13 +47,9 @@ public class AuctionController {
         return postsService.getPostById(id);
     }
 
-    @GetMapping("/{id}/delete")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String deletePost(@PathVariable Long id, Model model){
+    @DeleteMapping("/{id}/delete")
+    public void deletePost(@PathVariable Long id){
         postsService.deletePost(id);
-        List<Post> posts = postsService.getAllPosts();
-        model.addAttribute("posts",posts);
-        return "posts";
     }
 
     @PostMapping("/post")
@@ -66,9 +63,9 @@ public class AuctionController {
             @RequestParam(name = "fuel") String fuel,
             @RequestParam(name = "city") String city,
             @RequestParam(name = "price") Integer price,
-            @RequestParam(name = "bet_time")Integer betTime)
+            @RequestParam(name = "post_time")Long postTime,
+            @RequestParam(name = "bet_time")Long betTime)
     {
-
         Post post = Post.builder()
                 .make(make)
                 .model(model)
@@ -78,6 +75,7 @@ public class AuctionController {
                 .fuel(fuel)
                 .city(city)
                 .price(price)
+                .postTime(postTime)
                 .betTime(betTime)
                 .build();
 
@@ -88,8 +86,6 @@ public class AuctionController {
     public Post getFailure() {
         throw new RuntimeException("This is an error");
     }
-
-
 
 
 }

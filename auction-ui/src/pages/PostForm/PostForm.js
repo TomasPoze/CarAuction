@@ -8,28 +8,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import carMake from '../../components/CarList/carMake.json'
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import _ from 'lodash';
-import FormikState from '../../components/FormikState/FormikState';
-
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-}));
 
 const initialState = {
     make: '',
@@ -39,7 +19,8 @@ const initialState = {
     gearbox: '',
     fuel: '',
     city: '',
-    price: '',
+    price: 0,
+    postTime: new Date().getTime(),
     betTime: ''
 }
 
@@ -74,7 +55,6 @@ const validationSchema = Yup.object().shape({
 const carsMake = carMake;
 
 export default () => {
-    const { i18n } = useTranslation()
     const { t } = useTranslation("car")
 
     const [file, setFile] = useState({});
@@ -85,17 +65,6 @@ export default () => {
     const history = useHistory();
     const { from } = location.state || { from: { pathname: '/auctions' } }
 
-
-    // material-ui selectas
-    const classes = useStyles();
-    const [carId, setCarId] = React.useState('');
-
-
-    const handleChange = (event) => {
-        setCarId(event.target.value);
-        // console.log(JSON.stringify(cars[0].name))
-        console.log()
-    };
 
     return (
         <React.Fragment>
@@ -112,55 +81,24 @@ export default () => {
                 >
                     {(props) => (
                         <Form id="carform">
-                            {/* <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="make" id="demo-simple-select-label">Markė</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={carId}
-                        onChange={handleChange}
-                        >
-                        {carsMake.map(car => (
-                            <MenuItem name="make" required value={car.name}>{x} </MenuItem>
-                            ))}
-                            </Select>
-                        </FormControl> */}
                             <div>
                                 <label htmlFor="make">{t("make")}:</label>
                                 <Field name="make" as="select" placeholder="Favorite Color">
-                                    {carsMake.map(car => (
-                                        <option value={car.name}>{car.name}</option>
+                                    {carsMake.map((car,index) => (
+                                        <option key={index} value={car.name}>{car.name}</option>
                                     ))}
                                 </Field>
                                 <ErrorMessageTranslated className="error" name="make" />
-
                             </div>
-
                             <div>
                                 <label htmlFor="model">{t("model")}:</label>
                                 <Field name="model" as="select">
-                                    {props.values.make ? carsMake.find(carMake => carMake.name === props.values.make).model.map(model => (
-                                        <option value={model}>{model}</option>
+                                    {props.values.make ? carsMake.find(carMake => carMake.name === props.values.make).model.map((model,index) => (
+                                        <option key={index} value={model}>{model}</option>
                                     )) : ""}
                                 </Field>
                                 <ErrorMessageTranslated className="error" name="model" />
                             </div>
-
-
-                            {/* <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-label">Modelis</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={carId}
-                        onChange={handleChange}
-                        >
-                        <MenuItem value={1}>A4</MenuItem>
-                        <MenuItem value={2}>320</MenuItem>
-                        <MenuItem value={3}>330</MenuItem>
-                        </Select>
-                    </FormControl> */}
-
                             <div>
                                 <label htmlFor="year">{t("year")}:</label>
                                 <Field name="year" type="text" />
@@ -192,7 +130,6 @@ export default () => {
                                     <option value={t("fuel6")}>{t("fuel6")}</option>
                                     <option value={t("fuel7")}>{t("fuel7")}</option>
                                     <option value={t("fuel8")}>{t("fuel8")}</option>
-
                                 </Field>
                                 <ErrorMessageTranslated className="error" name="fuel" />
                             </div>
@@ -209,11 +146,6 @@ export default () => {
                                 <ErrorMessageTranslated className="error" name="city" />
                             </div>
                             <div>
-                                <label htmlFor="price">{t("price")}:</label>
-                                <Field name="price"></Field>
-                                <ErrorMessageTranslated className="error" name="price" />
-                            </div>
-                            <div>
                                 <label htmlFor="file">{t("file")}:</label>
                                 <Field name="files" type="file" onChange={handleFileChange} />
                             </div>
@@ -221,11 +153,11 @@ export default () => {
                                 <label htmlFor="time">{t("setTime")}:</label>
                                 <Field name="betTime" as="select">
                                     <option></option>
-                                    <option value="1">1 d.</option>
-                                    <option value="2">2 d.</option>
-                                    <option value="3">3 d.</option>
-                                    <option value="4">4 d.</option>
-                                    <option value="5">5 d.</option>
+                                    <option value="86400000">1 d.</option>
+                                    <option value="172800000">2 d.</option>
+                                    <option value="259200000">3 d.</option>
+                                    <option value="345600000">4 d.</option>
+                                    <option value="432000000">5 d.</option>
                                 </Field>
                                 <ErrorMessageTranslated className="error" name="betTime" />
                             </div>

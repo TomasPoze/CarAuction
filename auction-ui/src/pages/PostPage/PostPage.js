@@ -21,7 +21,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
+import betsApi from '../../api/betsApi';
 
 const useStyles = makeStyles({
     table: {
@@ -36,52 +36,69 @@ const validationSchema = Yup.object().shape({
         .required()
 })
 
-
-
 export default () => {
 
-    const { i18n } = useTranslation()
     const { t } = useTranslation("car")
+    const [post, setPost] = useState({});
 
-    var countDownDate = new Date("2020 07 25").getTime();
+    const aucTime = () => {
+        var countDownDate = new Date(post.betTime + post.postTime).getTime();
 
-    var now = new Date().getTime();
+        var now = new Date().getTime();
 
-    var distance = countDownDate - now;
+        var distance = countDownDate - now;
+        if (distance > 0) {
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var second = Math.floor((distance % (1000 * 60)) / 1000);
+            return <>
+                {days + "d " + hours + "h " + minutes + "m " + seconds + "s"}
+            </>
+        } else {
+            return 0;
+        }
+    }
 
-    const [seconds, setSeconds] = useState(distance);
+    const calculateTimeLeft = () => {
+        let timeLeft = {};
+
+        var countDownDate = new Date(post.betTime + post.postTime).getTime();
+
+        var now = new Date().getTime();
+
+        var distance = countDownDate - now
+
+        if (distance > 0) {
+            timeLeft = {
+                d: Math.floor(distance / (1000 * 60 * 60 * 24)),
+                h: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                s: Math.floor((distance % (1000 * 60)) / 1000),
+            };
+        }
+        return timeLeft;
+    }
+
+    const [timeLeft, setTimeLeft] = useState();
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds(seconds => seconds - 1);
-            if (distance < 0) {
-                clearInterval(interval);
-                return "EXPIRED"
-            }
+        setTimeout(() => {
+            setTimeLeft(calculateTimeLeft());
         }, 1000);
+    });
 
-    }, []);
 
-    const showTimer = distance < 0 ? (
-        <>
-            <h4 className="over">Aukcionas pasibage</h4>
-        </>
-    ) : <>
-            {days + "d " + hours + "h " + minutes + "m " + second + "s"}
-        </>
+    const showTimer = aucTime() !== 0 ? aucTime() : <span className="over">{t("auc")}</span>
 
+    
 
     const classes = useStyles();
 
-    const { user, logout, loggedIn } = useContext(UserContext)
+    const { user, loggedIn } = useContext(UserContext)
 
     const { id } = useParams({});
-    const [post, setPost] = useState({});
     const [posts, setPosts] = useState({});
 
     const [bet, setBet] = useState({ content: [], });
@@ -96,7 +113,7 @@ export default () => {
         date: '',
         sum: '',
         username: '',
-        postId: ''
+        postId: '',
     }
 
     const onSubmit = values => {
@@ -104,7 +121,8 @@ export default () => {
         values.date = state.data.toLocaleDateString() + " " + state.data.toLocaleTimeString();
         values.username = user.username;
         values.postId = post.id;
-        postsApi.createBet(values);
+        betsApi.createBet(values);
+
     }
 
     const sumInput = bet.content.length !== 0 ? (bet.content[bet.content.length - 1].sum) : 0
@@ -123,12 +141,11 @@ export default () => {
                 </Form>
             </Formik>
         </>
-    ) : <Button color="" href="/login" className="green-border border">{t("toBet")}</Button>
+    ) : <Button href="/login" className="green-border border">{t("toBet")}</Button>
 
     const deletePost = e => {
         postsApi.deletePostById(id)
             .then(resp => setPosts(resp.data));
-
     }
 
     const deleteButton = loggedIn() ? (
@@ -140,18 +157,13 @@ export default () => {
     ) : <span></span>
 
 
-    // useEffect(() => {
-    //     postsApi.fetchBetById(id)
-    //         .then(resp => setBet(resp.data))
-    // }, [id])
-
     useEffect(() => {
         postsApi.fetchPostById(id)
             .then(resp => setPost(resp.data));
     }, [id])
 
     useEffect(() => {
-        postsApi.fetchBets(id)
+        betsApi.fetchBets(id)
             .then(resp => setBet(resp.data))
     }, [id])
 
@@ -160,7 +172,6 @@ export default () => {
     return (
         <React.Fragment>
             <Container maxWidth="lg">
-                {/* <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} /> */}
                 <div className="grid-container pt-5">
                     <div>
                         <Carousel>
@@ -175,7 +186,7 @@ export default () => {
                                 <img
                                     className="d-block w-100"
                                     src={`http://localhost:8080/files/${post.fileName}`}
-                                    alt="First slide"
+                                    alt="Second slide"
                                 />
                             </Carousel.Item>
                         </Carousel>
@@ -190,7 +201,7 @@ export default () => {
                         {deleteButton}
                     </div>
                     <div className="mt-4 grey-border fixb">
-                        <h5>Aukciono statistika</h5>
+                        <h5>{t("stats")}</h5>
                         <TableContainer component={Paper} className="scroll">
                             <Table className={classes.table} aria-label="simple table">
                                 <TableHead>
@@ -221,7 +232,7 @@ export default () => {
                         <p>{t("lastBet")}: <span className="price">
                             {sumInput}
                         €</span></p>
-                        {loggedInBlock}
+                        {aucTime() !== 0 ? loggedInBlock : ""}
                     </div>
                 </div>
             </Container>

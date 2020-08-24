@@ -46,7 +46,10 @@
         "aucEnd":"Until the end of the auction",
         "lastBet":"Last bet",
         "toBet":"TO BET - LOG IN",
-        "makeBet":"Make a bet"
+        "makeBet":"Make a bet",
+        "auc":"Auction is over",
+        "stats":"Auction statistics"
+        
     },
     "registration": {
         "signUp": "Sign Up",

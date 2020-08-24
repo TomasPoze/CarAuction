@@ -11,6 +11,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 
 @Data
@@ -54,15 +56,18 @@ public class Post {
     private String city;
 
     @Column(name = "price")
-    @DecimalMin("1")
+    @DecimalMin("0")
     @NotNull
     private Integer price;
 
     @Column(name = "file_name")
     private String fileName;
 
+    @Column(name = "post_time")
+    private Long postTime;
+
     @Column(name = "bet_time")
-    private Integer betTime;
+    private Long betTime;
 
     @Tolerate
     public Post(){}

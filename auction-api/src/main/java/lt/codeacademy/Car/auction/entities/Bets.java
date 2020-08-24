@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.experimental.Tolerate;
 
 import javax.persistence.*;
-import java.util.Date;
+
 
 @Data
 @Builder
@@ -35,9 +35,11 @@ public class Bets {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "post_id")
-    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post;
 
     @Tolerate
-    public Bets(){}
+    public Bets() {
+    }
 }

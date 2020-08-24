@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Formik, Form, Field } from 'formik';
-import FormikState from "../../components/FormikState/FormikState";
 import { useHistory, useLocation } from 'react-router-dom';
 import userApi from '../../api/userApi';
 import { setCredentials } from '../../api';
@@ -58,7 +57,6 @@ function Copyright() {
 
 export default () => {
     const classes = useStyles();
-    const { i18n } = useTranslation()
     const { t } = useTranslation("registration")
 
     const { login } = useContext(UserContext);

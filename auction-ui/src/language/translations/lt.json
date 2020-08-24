@@ -45,7 +45,10 @@
         "aucEnd":"Iki aukciono pabaigos",
         "lastBet":"Paskutinis statymas",
         "toBet":"NORĖDAMI STATYTI - PRISIJUNKITE",
-        "makeBet":"Daryti statymą"
+        "makeBet":"Daryti statymą",
+        "auc":"Aukcionas pasibage",
+        "stats":"Aukciono statistika"
+
 
     },
     "registration": {

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Formik, Form, Field } from 'formik';
-import FormikState from "../../components/FormikState/FormikState";
 import { useHistory, useLocation } from 'react-router-dom';
 import userApi from '../../api/userApi';
 import { setCredentials } from '../../api';
@@ -62,7 +61,6 @@ function Copyright() {
 
 export default () => {
   const classes = useStyles();
-  const { i18n } = useTranslation()
   const { t } = useTranslation("registration")
 
   const { login } = useContext(UserContext);
@@ -94,7 +92,7 @@ export default () => {
             </Avatar>
             <Typography component="h1" variant="h5">
               {t("signUp")}
-                        </Typography>
+            </Typography>
             <Form className={classes.form}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -167,12 +165,12 @@ export default () => {
                 className={classes.submit}
               >
                 {t("signUp")}
-                </Button>
+              </Button>
               <Grid container justify="flex-end">
                 <Grid item>
                   <Link href="/login" variant="body2">
                     {t("acc")}
-              </Link>
+                  </Link>
                 </Grid>
               </Grid>
               {/* <FormikState {...props} /> */}

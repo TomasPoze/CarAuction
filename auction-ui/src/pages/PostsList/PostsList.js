@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import postsApi from '../../api/postsApi';
 import { useTranslation } from "react-i18next";
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -10,14 +10,6 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import { faCalendarAlt, faTachometerAlt, faGasPump, faCogs, faCity } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './styles.css';
-// import { Button } from 'react-bootstrap';
-
-//         <Button variant="warning">
-//                 <NavLink to={'/posts/post'}>Sukurti</NavLink>
-//         </Button>
-//         </>
-//     )
-// }
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,37 +36,72 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ComplexGrid() {
-    const { i18n } = useTranslation()
     const { t } = useTranslation("car")
 
     const classes = useStyles();
 
-    const { id } = useParams({});
-
-    const [bet, setBet] = useState({ content: [], });
-
     const [posts, setPosts] = useState([]);
-
-    const sumInput = bet.content.length !== 0 ? (bet.content[bet.content.length - 1].sum) : 0
-
 
     useEffect(() => {
         postsApi.fetchPosts()
             .then(response => setPosts(response.data))
     }, [])
 
-    useEffect(() => {
-        postsApi.fetchBetById(id)
-            .then(resp => setBet(resp.data))
-    }, [id])
+    const aucTime = (post) => {
+        var countDownDate = new Date(post.betTime + post.postTime).getTime();
 
-    // {posts.map(post => (
-    //     <tr key={post.id}>
-    //         <td>{post.title}</td>
-    //         <td>{post.price}</td>
-    //         <td><NavLink to={`/posts/${post.id}`}>More</NavLink></td>
-    //     </tr>
-    // ))}
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        if (distance > 0) {
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            return <>
+                {t("timer")}:
+                {" " + days + "d " + hours + "h " + minutes + "m " + seconds + "s"}
+            </>
+        } else {
+            return 0;
+        }
+    }
+
+
+    const calculateTimeLeft = (post) => {
+        let timeLeft = {};
+
+        var countDownDate = new Date(post.betTime + post.postTime).getTime();
+
+        var now = new Date().getTime();
+
+        var distance = countDownDate - now
+
+        if (distance > 0) {
+            timeLeft = {
+                d: Math.floor(distance / (1000 * 60 * 60 * 24)),
+                h: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+                s: Math.floor((distance % (1000 * 60)) / 1000),
+            };
+        }
+        return timeLeft;
+    }
+
+    const [timeLeft, setTimeLeft] = useState();
+
+    useEffect(() => {
+        let isMounted = true;
+        setTimeout(() => {
+            if (isMounted) {
+                setTimeLeft(calculateTimeLeft(0));
+            }
+        }, 1000);
+        return () => {isMounted = false};
+    });
+
+const showTimer = (post) => aucTime(post) !== 0 ? aucTime(post)  : <span className="">{t("auc")}</span>
 
     return (
         <div className={classes.root}>
@@ -86,9 +113,8 @@ export default function ComplexGrid() {
                                 <ButtonBase className={classes.image}>
                                     {
                                         post.fileName &&
-                                        <img className={classes.img} src={`http://localhost:8080/files/${post.fileName}`} alt="Car photo"></img>
+                                        <img className={classes.img} src={`http://localhost:8080/files/${post.fileName}`} alt="Car"></img>
                                     }
-                                    {/* <img className={classes.img} alt="complex" src="https://s.elenta.lt/units/680029/photos637141846519172263/1f.jpg" /> */}
                                 </ButtonBase>
                             </Grid>
                             <Grid item xs={12} sm container>
@@ -128,9 +154,12 @@ export default function ComplexGrid() {
                                     </Grid>
                                 </Grid>
                                 <Grid item >
-                                <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">{t("bet")}</Typography>
-                                    <Typography variant="h4" align="center" gutterBottom className="posfix">{sumInput}€</Typography>
-                                    <Typography variant="inherit" align="center" className="border padt">{t("timer")}: 12:23:11</Typography>
+                                    <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">{t("bet")}</Typography>
+                                    <Typography variant="h4" align="center" gutterBottom className="posfix">
+
+                                        {post.price}
+                                        €</Typography>
+                                    <Typography variant="inherit" align="center" className="border padt">{showTimer(post)}</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>

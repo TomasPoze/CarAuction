@@ -7,12 +7,6 @@ export default {
     fetchPostById(id) {
         return HTTP.get(`/posts/${id}`);
     },
-    fetchBetById(id){
-        return HTTP.get(`/bets/${id}`)
-    },
-    fetchBets(postId){
-        return HTTP.get(`/bets?postId=${postId}`)
-    },
     deletePostById(id){
         return HTTP.get(`/posts/${id}/delete`)
     },
@@ -27,16 +21,8 @@ export default {
         data.append("fuel", post.fuel);
         data.append("city", post.city);
         data.append("price", post.price);
+        data.append("post_time",post.postTime);
         data.append("bet_time",post.betTime);
         return HTTP.post('/posts/post', data);
     },
-    createBet(bet){
-        let data = new FormData();
-        data.append("city",bet.city);
-        data.append("date",bet.date);
-        data.append("sum",bet.sum);
-        data.append("username",bet.username);
-        data.append("post_id",bet.postId);
-        return HTTP.post('/bets/bet',data);
-    }
 }

@@ -36,24 +36,20 @@ export default () => {
             <Nav.Link href="#" onClick={logoutClick}>Atsijungti</Nav.Link>
         </>) :
         (<>
-            <LinkContainer to="/register" className="reg">
-                <Nav.Link className="reg">{t("register")}</Nav.Link>
+            <LinkContainer to="/register">
+                <Nav.Link>{t("register")}</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/login" className="reg">
+            <LinkContainer to="/login">
                 <Nav.Link>{t("login")}</Nav.Link>
             </LinkContainer>
         </>)
     return (
 
-        // <Navbar.Brand>
-        //     <Link to="/">Scratch</Link>
-        // </Navbar.Brand>
-
         <Navbar bg="dark" expand="lg" variant="dark">
             <Navbar.Brand>
                 <Link to="/home">{t("title")}</Link>
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <LinkContainer to="/home">
@@ -65,10 +61,12 @@ export default () => {
                     <LinkContainer to="/about">
                         <Nav.Link>{t("about")}</Nav.Link>
                     </LinkContainer>
-                    <NavDropdown title="" id="basic-nav-dropdown">
+                    <NavDropdown title="" id="collasible-nav-dropdown">
                         <NavDropdown.Item href="#EN" onClick={changeLanguage('en')}>EN</NavDropdown.Item>
                         <NavDropdown.Item href="#LT" onClick={changeLanguage('lt')}>LT</NavDropdown.Item>
                     </NavDropdown>
+                </Nav>
+                <Nav>
                     {loggedInBlock}
                 </Nav>
             </Navbar.Collapse>

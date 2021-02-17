@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory, useLocation } from 'react-router-dom';
 import userApi from '../../api/userApi';
-import { setCredentials } from '../../api';
-import { UserContext } from '../../App';
 
 import { useTranslation } from "react-i18next";
 import Avatar from '@material-ui/core/Avatar';
@@ -63,21 +61,16 @@ export default () => {
   const classes = useStyles();
   const { t } = useTranslation("registration")
 
-  const { login } = useContext(UserContext);
   const history = useHistory();
   const location = useLocation();
 
   const { from } = location.state || { from: { pathname: '/login' } }
 
   const onSubmit = values => {
-    // setCredentials(values)
-    // userApi.getUser()
-    //   .then(({ data }) => {
-    //     login(data)
-    //     history.push(from)
-    //   })
+
     userApi.createUser(values)
     history.push(from)
+  
   }
 
   return (

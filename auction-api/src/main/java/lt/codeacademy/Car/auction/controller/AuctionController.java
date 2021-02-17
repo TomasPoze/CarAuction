@@ -5,12 +5,9 @@ import io.swagger.annotations.ApiResponses;
 import lt.codeacademy.Car.auction.entities.Post;
 import lt.codeacademy.Car.auction.services.BetsService;
 import lt.codeacademy.Car.auction.services.PostsService;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,7 +27,7 @@ public class AuctionController {
     })
 
     @GetMapping
-    public List<Post> getProducts(){
+    public List<Post> getProducts() {
         return postsService.getAllPosts();
     }
 
@@ -47,9 +44,11 @@ public class AuctionController {
         return postsService.getPostById(id);
     }
 
-    @DeleteMapping("/{id}/delete")
-    public void deletePost(@PathVariable Long id){
+    @GetMapping("/{id}/delete")
+    public void deletePost(@PathVariable Long id) {
+        betsService.deleteBetsByPostId(id);
         postsService.deletePost(id);
+
     }
 
     @PostMapping("/post")
@@ -63,8 +62,8 @@ public class AuctionController {
             @RequestParam(name = "fuel") String fuel,
             @RequestParam(name = "city") String city,
             @RequestParam(name = "price") Integer price,
-            @RequestParam(name = "post_time")Long postTime,
-            @RequestParam(name = "bet_time")Long betTime)
+            @RequestParam(name = "post_time") Long postTime,
+            @RequestParam(name = "bet_time") Long betTime)
     {
         Post post = Post.builder()
                 .make(make)
@@ -79,7 +78,7 @@ public class AuctionController {
                 .betTime(betTime)
                 .build();
 
-        return postsService.createPost(post,file);
+        return postsService.createPost(post, file);
     }
 
     @GetMapping("/fail")

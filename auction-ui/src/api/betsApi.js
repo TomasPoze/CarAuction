@@ -20,6 +20,4 @@ fetchBetsAll(){
     return HTTP.post('/bets/bet',data);
 },
 
-
-
 }

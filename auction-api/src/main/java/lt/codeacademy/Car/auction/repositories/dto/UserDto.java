@@ -1,6 +1,8 @@
 package lt.codeacademy.Car.auction.repositories.dto;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 import lt.codeacademy.Car.auction.entities.Role;
 import lt.codeacademy.Car.auction.entities.User;
 
@@ -16,6 +18,8 @@ public class UserDto {
     private String password;
     private String city;
 
+    public UserDto() {
+    }
     public UserDto(User user) {
         this.name = user.getName();
         this.lastName = user.getLastName();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import postsApi from '../../api/postsApi';
 import { UserContext } from '../../App'
@@ -23,6 +23,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import betsApi from '../../api/betsApi';
 
+
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -39,6 +40,12 @@ const validationSchema = Yup.object().shape({
 export default () => {
 
     const { t } = useTranslation("car")
+    const { id } = useParams({});
+
+    const location = useLocation()
+    const history = useHistory();
+    const { from } = location.state || { from: { pathname: `/posts/${id}` } }
+
     const [post, setPost] = useState({});
 
     const aucTime = () => {
@@ -89,20 +96,14 @@ export default () => {
         }, 1000);
     });
 
-
     const showTimer = aucTime() !== 0 ? aucTime() : <span className="over">{t("auc")}</span>
-
-    
 
     const classes = useStyles();
 
     const { user, loggedIn } = useContext(UserContext)
 
-    const { id } = useParams({});
-    const [posts, setPosts] = useState({});
 
     const [bet, setBet] = useState({ content: [], });
-
 
     const state = {
         data: new Date()
@@ -121,8 +122,12 @@ export default () => {
         values.date = state.data.toLocaleDateString() + " " + state.data.toLocaleTimeString();
         values.username = user.username;
         values.postId = post.id;
-        betsApi.createBet(values);
-
+        setTimeout(() => {
+            betsApi.createBet(values)
+            .then(()=>{
+                history.push(from)
+            })
+        },1000)
     }
 
     const sumInput = bet.content.length !== 0 ? (bet.content[bet.content.length - 1].sum) : 0
@@ -143,9 +148,15 @@ export default () => {
         </>
     ) : <Button href="/login" className="green-border border">{t("toBet")}</Button>
 
-    const deletePost = e => {
-        postsApi.deletePostById(id)
-            .then(resp => setPosts(resp.data));
+
+    const deletePost = () => {
+        setTimeout(() => {
+            postsApi.deletePostById(id)
+            .then(() => {
+                history.replace('/auctions');
+            })
+
+        }, 1000)
     }
 
     const deleteButton = loggedIn() ? (
@@ -166,8 +177,6 @@ export default () => {
         betsApi.fetchBets(id)
             .then(resp => setBet(resp.data))
     }, [id])
-
-
 
     return (
         <React.Fragment>

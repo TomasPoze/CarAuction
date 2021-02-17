@@ -1,12 +1,17 @@
 package lt.codeacademy.Car.auction.controller;
 
 import lt.codeacademy.Car.auction.entities.Post;
+import lt.codeacademy.Car.auction.entities.Role;
 import lt.codeacademy.Car.auction.entities.User;
 import lt.codeacademy.Car.auction.repositories.dto.UserDto;
 import lt.codeacademy.Car.auction.services.UserDetailsServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @RestController
@@ -20,27 +25,27 @@ public class UserController {
     }
 
     @GetMapping
-    public UserDto getUser(@AuthenticationPrincipal User user){
+    public UserDto getUser(@AuthenticationPrincipal User user) {
         return new UserDto(user);
     }
 
     @PostMapping("/register")
-    public User createUser(
+    public void createUser(
             @RequestParam(name = "username") String username,
             @RequestParam(name = "password") String password,
             @RequestParam(name = "name") String name,
             @RequestParam("last_name") String lastName,
             @RequestParam("city") String city
-            ){
+    ) {
 
-        User user = User.builder()
-                .username(username)
-                .password(password)
-                .name(name)
-                .lastName(lastName)
-                .city(city)
-                .build();
+        UserDto userDto = new UserDto();
+                userDto.setUsername(username);
+                userDto.setPassword(password);
+                userDto.setName(name);
+                userDto.setLastName(lastName);
+                userDto.setCity(city);
+                userDto.setRoles(new HashSet<>(Collections.singletonList("CUSTOMER")));
 
-        return userService.saveOrUpdateUser(user);
+        userService.saveOrUpdateUser(userDto);
     }
 }

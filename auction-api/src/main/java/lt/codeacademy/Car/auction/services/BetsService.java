@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class BetsService {
-    private BetRepository betRepository;
+    private final BetRepository betRepository;
 
     public BetsService(BetRepository betRepository) {
         this.betRepository = betRepository;
@@ -35,5 +35,10 @@ public class BetsService {
 
     public List<Bets> getBets() {
         return betRepository.findAll();
+    }
+
+
+    public void deleteBetsByPostId(Long id) {
+        betRepository.deleteBetsByPostId(id);
     }
 }

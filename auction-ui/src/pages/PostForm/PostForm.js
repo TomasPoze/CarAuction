@@ -75,8 +75,10 @@ export default () => {
                     initialValues={initialState}
                     validationSchema={validationSchema}
                     onSubmit={values => {
-                        postsApi.createPost(values, file);
-                        history.replace(from)
+                        postsApi.createPost(values, file)
+                        .then(() => {
+                            setTimeout(()=> history.replace(from))
+                        },1000)
                     }}
                 >
                     {(props) => (

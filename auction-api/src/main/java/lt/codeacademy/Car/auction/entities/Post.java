@@ -69,6 +69,9 @@ public class Post {
     @Column(name = "bet_time")
     private Long betTime;
 
+    @Column(name = "post_active")
+    private boolean postActive;
+
     @Tolerate
     public Post(){}
 }

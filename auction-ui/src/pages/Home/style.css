@@ -1,69 +1,156 @@
-.pos{
-    text-align: right;
+.text-center{
+    text-align: center;
 }
-
-.flex{
-    position: relative;;
-    top: 150px;
+.flex-center{
 	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-around;
-	align-items: flex-end;
-	align-content: space-around;
+	justify-content: center;
+	align-items: center;
+}
+.flex-space-around{
+	display: flex;
+	justify-content: space-evenly;
+	
+}
+.flex-sitemap{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.grid-container-home {
-    display: grid;
-    grid-template-columns: 1.4fr 0.3fr 1.4fr;
-    grid-template-rows: 0.9fr 1.2fr 0.9fr;
-    gap: 1px 1px;
-    grid-template-areas: ". . ." ". . ." ". . .";
-}
 
-.bg-img1{
-    background-image: url("https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+
+.hero-banner{
+    display: flex;
+    min-height: 630px;
+    background: url(../../components/Images/car.png);
     background-repeat: no-repeat;
-    background-size: cover;
     background-position: center;
-    width: 100% ;
-}
-.bg-img2{
-    background-image: url("https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0 -240px;
-    width: 100% ;
+    background-position-y: 250px;
 }
 
-.card {
-    height: 200px;
-    position: relative;
-    border: 3px solid green; 
+.intro-text{
+    width: 100%;
+    max-width: 600px;
+    margin: -350px auto 0;
 }
 
-.center{
-    width: 600px;
-    height: 500px;
+.main {
+    width: 100%;
+    max-width: 1170px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
 }
 
-.but-pos{
-    display: block;
-    text-align: center;
-    line-height: 500px;
-    color: rgb(0, 119, 255) ;
-    font-size: 30px;
-    font-weight: 800;
+.button{
+    border: none;
+    border-radius: 5px;
+    padding: 6px 17px;
+    margin: 20px 3px;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.button-prim{
+    background-color: rgb(0, 202, 0);
+    color: white;
+    font-weight: 600;
+}
+
+.button-sec{
+    background-color: rgb(0, 162, 202);
+    color: white;
+    font-weight: 600;
+}
+
+.button-grey{
+    background-color: rgb(219, 219, 219);
+    border: solid 1px;
+    border-color: rgb(163, 163, 163);
+    color: black;
+    font-weight: 600;
+}
+
+.button-grey:hover{
+    background-color: rgb(199, 199, 199);
+    text-decoration: none;
+    color: black;
+    transition: 0.5s ease;
+}
+
+.button-prim:hover  {
+    background-color: rgb(0, 175, 0);
+    color: white;
+    text-decoration: none;
+}
+.button-sec:hover  {
+    background-color: rgb(0, 145, 182);
+    color: white;
     text-decoration: none;
 }
 
-.but-pos2{
-    display: block;
-    text-align: center;
-    line-height: 500px;
-    color: rgb(0, 255, 136) ;
-    font-size: 30px;
-    font-weight: 800;
-    text-decoration: none;
+.footer-text a{
+    font-size: 18px;
+    color: white;
+    padding: 0 0 10px 0;
+    
 }
- 
+
+footer{
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+}
+
+@media only screen and (max-width: 637px){
+    [class*="hero-banner"]{
+        background-size: contain;
+    }
+
+}
+@media only screen and (max-width: 434px){
+    [class*="hero-banner"]{
+        background-position-y: 350px;
+    }
+    [class*="intro-text"]{
+        margin: -250px auto 0;
+    }
+    .flex-car-timer{
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 366px){
+    .flex-car-timer{
+        display: block;
+        margin-left: auto !important;
+        margin-right: auto  !important;
+        font-size: 17px;
+    }
+    .intro-text h1{
+        font-size: 38px;
+    }
+}
+
+@media only screen and (max-width: 322px){
+    .hero-banner{
+        background-position-y: 420px;
+    }
+    .intro-text h1{
+        font-size: 34px;
+    }
+}
+@media only screen and (max-width: 304px){
+    .hero-banner{
+        background-position-y: 420px;
+    }
+    .intro-text h1{
+        margin: 50px auto 0;
+    }
+    .flex-car-timer{
+     font-size: 14px;
+    }
+}

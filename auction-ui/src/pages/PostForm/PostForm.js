@@ -76,9 +76,9 @@ export default () => {
                     validationSchema={validationSchema}
                     onSubmit={values => {
                         postsApi.createPost(values, file)
-                        .then(() => {
-                            setTimeout(()=> history.replace(from))
-                        },1000)
+                            .then(() => {
+                                setTimeout(() => history.replace(from))
+                            }, 1000)
                     }}
                 >
                     {(props) => (
@@ -86,7 +86,7 @@ export default () => {
                             <div>
                                 <label htmlFor="make">{t("make")}:</label>
                                 <Field name="make" as="select" placeholder="Favorite Color">
-                                    {carsMake.map((car,index) => (
+                                    {carsMake.map((car, index) => (
                                         <option key={index} value={car.name}>{car.name}</option>
                                     ))}
                                 </Field>
@@ -95,7 +95,7 @@ export default () => {
                             <div>
                                 <label htmlFor="model">{t("model")}:</label>
                                 <Field name="model" as="select">
-                                    {props.values.make ? carsMake.find(carMake => carMake.name === props.values.make).model.map((model,index) => (
+                                    {props.values.make ? carsMake.find(carMake => carMake.name === props.values.make).model.map((model, index) => (
                                         <option key={index} value={model}>{model}</option>
                                     )) : ""}
                                 </Field>

@@ -25,4 +25,7 @@ export default {
         data.append("bet_time",post.betTime);
         return HTTP.post('/posts/post', data);
     },
+    fetchActivePosts(){
+        return HTTP.get(`/posts/active`)
+    }
 }

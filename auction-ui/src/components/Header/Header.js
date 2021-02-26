@@ -36,7 +36,7 @@ export default () => {
             <Nav.Link href="#" onClick={logoutClick}>Atsijungti</Nav.Link>
         </>) :
         (<>
-            <LinkContainer to="/register">
+            <LinkContainer to="/register" >
                 <Nav.Link>{t("register")}</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/login">

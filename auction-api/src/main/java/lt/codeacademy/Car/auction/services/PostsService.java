@@ -46,4 +46,8 @@ public class PostsService {
     public void deletePost(Long id) {
        postRepository.deleteById(id);
     }
+
+    public List<Post> getActivePosts() {
+        return postRepository.findPostByPostActive(true);
+    }
 }

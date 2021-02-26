@@ -98,10 +98,10 @@ export default function ComplexGrid() {
                 setTimeLeft(calculateTimeLeft(0));
             }
         }, 1000);
-        return () => {isMounted = false};
+        return () => { isMounted = false };
     });
 
-const showTimer = (post) => aucTime(post) !== 0 ? aucTime(post)  : <span className="">{t("auc")}</span>
+    const showTimer = (post) => aucTime(post) !== 0 ? aucTime(post) : <span className="">{t("auc")}</span>
 
     return (
         <div className={classes.root}>
@@ -121,9 +121,7 @@ const showTimer = (post) => aucTime(post) !== 0 ? aucTime(post)  : <span classNa
                                 <Grid item xs container direction="column" spacing={2}>
                                     <Grid item xs>
                                         <Typography gutterBottom variant="h5">
-                                            {post.make}
-                                        &nbsp;
-                                        {post.model}
+                                        {`${post.make} ${post.model}`}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
                                             <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
@@ -156,9 +154,8 @@ const showTimer = (post) => aucTime(post) !== 0 ? aucTime(post)  : <span classNa
                                 <Grid item >
                                     <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">{t("bet")}</Typography>
                                     <Typography variant="h4" align="center" gutterBottom className="posfix">
-
-                                        {post.price}
-                                        €</Typography>
+                                        {post.price + `€`}
+                                    </Typography>
                                     <Typography variant="inherit" align="center" className="border padt">{showTimer(post)}</Typography>
                                 </Grid>
                             </Grid>

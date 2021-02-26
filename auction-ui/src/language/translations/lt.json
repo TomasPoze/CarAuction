@@ -1,18 +1,24 @@
 {
     "common": {
-        "title": "Masinu-Aukcionas",
+        "title": "Mašinu-Aukcionas",
         "home": "Pagrindinis",
         "auctions": "Aukcionai",
         "about": "Apie",
         "language": "Kalba",
         "register": "Registracija",
         "signin": "Prisijungimas",
-        "search": "Ieskoti",
+        "search": "Ieškoti",
         "login": "Prisijungti"
     },
     "home": {
         "auctions": "Aukcionai",
-        "create": " Sukurti Aukciona"
+        "create": " Sukurti aukcioną",
+        "main-title" : "lengvas būdas parduoti ar įsigyti automobilį",
+        "ongoing-auc":"Vykstantys aukcionai",
+        "all-auc":"Visi aukcionai",
+        "info":"Daugiau info",
+        "contact":"Kontaktai",
+        "about-text":"Car-Auction yra projektas, kuri teko atlikti kaip 'Code Academy' Studijos 101 kursu baigiamaji darba. Naudojant REST API , Java, JS + React."
     },
     "car": {
         "carLoc":"Auto buvimo miestas",

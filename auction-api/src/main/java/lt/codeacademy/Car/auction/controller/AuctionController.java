@@ -27,7 +27,7 @@ public class AuctionController {
     })
 
     @GetMapping
-    public List<Post> getProducts() {
+    public List<Post> getPosts() {
         return postsService.getAllPosts();
     }
 
@@ -76,6 +76,7 @@ public class AuctionController {
                 .price(price)
                 .postTime(postTime)
                 .betTime(betTime)
+                .postActive(true)
                 .build();
 
         return postsService.createPost(post, file);
@@ -84,6 +85,11 @@ public class AuctionController {
     @GetMapping("/fail")
     public Post getFailure() {
         throw new RuntimeException("This is an error");
+    }
+
+    @GetMapping("/active")
+    public List<Post> getActivePosts(){
+        return postsService.getActivePosts();
     }
 
 

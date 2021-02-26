@@ -13,7 +13,13 @@
     },
     "home": {
         "auctions": "Auctions",
-        "create":"Create Auction"
+        "create":"Create Auction",
+        "main-title":"easy way to sell or buy a car",
+        "ongoing-auc":"Ongoing auctions",
+        "all-auc":"All auctions",
+        "info":"More info",
+        "contact":"Contacts",
+        "about-text":"Car-Auction is a project that I had to create as a final project for 'CodeAcademy' Studies 101 Java + Spring courses." 
     },
     "car":{
         "carLoc":"Car location",
@@ -46,7 +52,7 @@
         "aucEnd":"Until the end of the auction",
         "lastBet":"Last bet",
         "toBet":"TO BET - LOG IN",
-        "makeBet":"Make a bet",
+        "makeBet":"Place a bet",
         "auc":"Auction is over",
         "stats":"Auction statistics"
         

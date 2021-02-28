@@ -121,7 +121,7 @@ export default function ComplexGrid() {
                                 <Grid item xs container direction="column" spacing={2}>
                                     <Grid item xs>
                                         <Typography gutterBottom variant="h5">
-                                        {`${post.make} ${post.model}`}
+                                            {`${post.make} ${post.model}`}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
                                             <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
@@ -151,12 +151,14 @@ export default function ComplexGrid() {
                                         </Typography>
                                     </Grid>
                                 </Grid>
-                                <Grid item >
-                                    <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">{t("bet")}</Typography>
-                                    <Typography variant="h4" align="center" gutterBottom className="posfix">
-                                        {post.price + `€`}
-                                    </Typography>
-                                    <Typography variant="inherit" align="center" className="border padt">{showTimer(post)}</Typography>
+                                <Grid item className="flex-car-timer">
+                                    <div>
+                                        <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">{t("bet")}</Typography>
+                                        <Typography variant="h4" align="center" gutterBottom className="posfix pb-3">
+                                            {post.price + `€`}
+                                        </Typography>
+                                    </div>
+                                    <Typography variant="inherit" align="center" className="border">{showTimer(post)}</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>

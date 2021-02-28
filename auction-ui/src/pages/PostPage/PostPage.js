@@ -9,7 +9,7 @@ import Secured from '../../components/Secured/Secured';
 
 import Container from '@material-ui/core/Container';
 
-import Carousel from 'react-bootstrap/Carousel'
+import { Carousel } from 'react-bootstrap'
 import './styles.css'
 
 import Button from '@material-ui/core/Button';
@@ -22,6 +22,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import betsApi from '../../api/betsApi';
+import { wrap } from 'lodash';
 
 
 const useStyles = makeStyles({
@@ -41,12 +42,17 @@ export default () => {
 
     const { t } = useTranslation("car")
     const { id } = useParams({});
+    const { user, loggedIn } = useContext(UserContext)
 
     const location = useLocation()
+    const classes = useStyles();
     const history = useHistory();
     const { from } = location.state || { from: { pathname: `/posts/${id}` } }
 
     const [post, setPost] = useState({});
+    const [timeLeft, setTimeLeft] = useState();
+    const [bet, setBet] = useState({ content: [] });
+
 
     const aucTime = () => {
         var countDownDate = new Date(post.betTime + post.postTime).getTime();
@@ -88,22 +94,26 @@ export default () => {
         return timeLeft;
     }
 
-    const [timeLeft, setTimeLeft] = useState();
-
     useEffect(() => {
         setTimeout(() => {
             setTimeLeft(calculateTimeLeft());
         }, 1000);
     });
 
+    useEffect(() => {
+        postsApi.fetchPostById(id)
+            .then(resp => setPost(resp.data));
+    }, [id])
+
+    useEffect(() => {
+            let interval = setInterval(() => {
+                betsApi.fetchBets(id)
+                .then(resp => setBet(resp.data))
+        }, 1000)
+        return () => clearInterval(interval);
+    }, [id])
+
     const showTimer = aucTime() !== 0 ? aucTime() : <span className="over">{t("auc")}</span>
-
-    const classes = useStyles();
-
-    const { user, loggedIn } = useContext(UserContext)
-
-
-    const [bet, setBet] = useState({ content: [], });
 
     const state = {
         data: new Date()
@@ -122,12 +132,21 @@ export default () => {
         values.date = state.data.toLocaleDateString() + " " + state.data.toLocaleTimeString();
         values.username = user.username;
         values.postId = post.id;
-        setTimeout(() => {
-            betsApi.createBet(values)
-            .then(()=>{
-                history.push(from)
+
+        betsApi.createBet(values)
+            .then(() => {
+                betsApi.fetchBets(id)
+                    .then(resp => setBet(resp.data))
             })
-        },1000)
+    }
+
+    const deletePost = () => {
+        setTimeout(() => {
+            postsApi.deletePostById(id)
+                .then(() => {
+                    history.replace('/auctions');
+                })
+        }, 1000)
     }
 
     const sumInput = bet.content.length !== 0 ? (bet.content[bet.content.length - 1].sum) : 0
@@ -149,16 +168,6 @@ export default () => {
     ) : <Button href="/login" className="green-border border">{t("toBet")}</Button>
 
 
-    const deletePost = () => {
-        setTimeout(() => {
-            postsApi.deletePostById(id)
-            .then(() => {
-                history.replace('/auctions');
-            })
-
-        }, 1000)
-    }
-
     const deleteButton = loggedIn() ? (
         <>
             <Secured role="ADMIN">
@@ -168,23 +177,13 @@ export default () => {
     ) : <span></span>
 
 
-    useEffect(() => {
-        postsApi.fetchPostById(id)
-            .then(resp => setPost(resp.data));
-    }, [id])
-
-    useEffect(() => {
-        betsApi.fetchBets(id)
-            .then(resp => setBet(resp.data))
-    }, [id])
-
     return (
         <React.Fragment>
             <Container maxWidth="lg">
                 <div className="grid-container pt-5">
-                    <div>
+                    <div >
                         <Carousel>
-                            <Carousel.Item>
+                            <Carousel.Item >
                                 <img
                                     className="d-block w-100"
                                     src={`http://localhost:8080/files/${post.fileName}`}

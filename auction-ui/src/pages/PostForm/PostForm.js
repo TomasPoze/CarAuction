@@ -20,7 +20,6 @@ const initialState = {
     fuel: '',
     city: '',
     price: 0,
-    postTime: new Date().getTime(),
     betTime: ''
 }
 
@@ -57,7 +56,7 @@ const carsMake = carMake;
 export default () => {
     const { t } = useTranslation("car")
 
-    const [file, setFile] = useState({});
+    const [file, setFile] = useState([{}]);
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     }
@@ -149,7 +148,7 @@ export default () => {
                             </div>
                             <div>
                                 <label htmlFor="file">{t("file")}:</label>
-                                <Field name="files" type="file" onChange={handleFileChange} />
+                                <Field name="files" type="file" onChange={handleFileChange} multiple />
                             </div>
                             <div>
                                 <label htmlFor="time">{t("setTime")}:</label>

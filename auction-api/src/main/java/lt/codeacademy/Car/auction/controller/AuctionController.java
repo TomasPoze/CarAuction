@@ -8,6 +8,7 @@ import lt.codeacademy.Car.auction.services.PostsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -62,9 +63,9 @@ public class AuctionController {
             @RequestParam(name = "fuel") String fuel,
             @RequestParam(name = "city") String city,
             @RequestParam(name = "price") Integer price,
-            @RequestParam(name = "post_time") Long postTime,
             @RequestParam(name = "bet_time") Long betTime)
     {
+        Date date = new Date();
         Post post = Post.builder()
                 .make(make)
                 .model(model)
@@ -74,7 +75,7 @@ public class AuctionController {
                 .fuel(fuel)
                 .city(city)
                 .price(price)
-                .postTime(postTime)
+                .postTime(date.getTime())
                 .betTime(betTime)
                 .postActive(true)
                 .build();

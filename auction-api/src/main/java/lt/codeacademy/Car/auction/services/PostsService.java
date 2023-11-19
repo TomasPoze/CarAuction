@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 public class PostsService {
-    private PostRepository postRepository;
-    private FileStorageService fileStorageService;
+    private final PostRepository postRepository;
+    private final FileStorageService fileStorageService;
 
     public PostsService(PostRepository postRepository, FileStorageService fileStorageService) {
         this.postRepository = postRepository;
@@ -50,4 +50,5 @@ public class PostsService {
     public List<Post> getActivePosts() {
         return postRepository.findPostByPostActive(true);
     }
+
 }

@@ -124,38 +124,32 @@ export default function ComplexGrid() {
                                             {`${post.make} ${post.model}`}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
-                                            <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
-                                        &nbsp;
-                                        {" " + post.year}
+                                            <FontAwesomeIcon icon={faCalendarAlt} size="lg" className="mr-1" />
+                                            {" " + post.year}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
-                                            <FontAwesomeIcon icon={faTachometerAlt} size="lg" />
-                                        &nbsp;
-                                        {post.km + " km"}
-
+                                            <FontAwesomeIcon icon={faTachometerAlt} size="lg" className="mr-1" />
+                                            {post.km + " km"}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
-                                            <FontAwesomeIcon icon={faCogs} size="lg" />
-                                        &nbsp;
-                                        {post.gearbox}
+                                            <FontAwesomeIcon icon={faCogs} size="lg" className="mr-1" />
+                                            {post.gearbox}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
-                                            <FontAwesomeIcon icon={faGasPump} size="lg" />
-                                        &nbsp;
-                                        {post.fuel}
+                                            <FontAwesomeIcon icon={faGasPump} size="lg" className="mr-1" />
+                                            {post.fuel}
                                         </Typography>
                                         <Typography variant="body2" gutterBottom>
-                                            <FontAwesomeIcon icon={faCity} size="lg" />
-                                        &nbsp;
-                                        {post.city}
+                                            <FontAwesomeIcon icon={faCity} size="lg" className="mr-1" />
+                                            {post.city}
                                         </Typography>
                                     </Grid>
                                 </Grid>
                                 <Grid item className="flex-car-timer">
                                     <div>
-                                        <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix">{t("bet")}</Typography>
-                                        <Typography variant="h4" align="center" gutterBottom className="posfix pb-3">
-                                            {post.price + `€`}
+                                        <Typography variant="subtitle1" color="textSecondary" align="center" className="posfix" >{post.postActive ? t("bet") : t("lastBet")}</Typography>
+                                        <Typography variant="h4" align="center" gutterBottom className={post.postActive ? `posfix pb-3` : `blurry-text` + ` posfix pb-3 `}>
+                                            {post.postActive ? post.price + `€` : "0000$"}
                                         </Typography>
                                     </div>
                                     <Typography variant="inherit" align="center" className="border">{showTimer(post)}</Typography>

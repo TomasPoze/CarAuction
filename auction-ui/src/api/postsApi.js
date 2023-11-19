@@ -21,7 +21,6 @@ export default {
         data.append("fuel", post.fuel);
         data.append("city", post.city);
         data.append("price", post.price);
-        data.append("post_time",post.postTime);
         data.append("bet_time",post.betTime);
         return HTTP.post('/posts/post', data);
     },

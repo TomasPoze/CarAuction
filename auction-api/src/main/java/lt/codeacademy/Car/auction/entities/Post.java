@@ -5,6 +5,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
+import lt.codeacademy.Car.auction.controller.AuctionController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
@@ -73,5 +77,16 @@ public class Post {
     private boolean postActive;
 
     @Tolerate
-    public Post(){}
+    public Post() {
+    }
+
+//    @Scheduled(fixedRate = 5000)
+//    public void AuctionIsOver() {
+//        Date checkDate = new Date();
+//        if (checkDate.getTime() > postTime + betTime) {
+//            if (postActive) {
+//                postActive = false;
+//            }
+//        }
+//    }
 }
